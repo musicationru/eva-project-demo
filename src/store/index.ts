@@ -1,15 +1,22 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
+import Vuex, { StoreOptions } from 'vuex';
+import buildings from './buildings';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store: StoreOptions<any> = {
   state: {
+  },
+  getters: {
+
   },
   mutations: {
   },
   actions: {
   },
   modules: {
+    buildings,
   },
-});
+};
+
+export default new Vuex.Store(store);
