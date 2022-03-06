@@ -2,7 +2,7 @@
   <div class="home">
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <v-container>
-      <v-row class="mt-11">
+      <v-row v-if="buildings" class="mt-11">
         <v-card v-for="building in buildings" :key="building.id" class="building-card">
           <v-row>
             <v-col>{{ building.floor }}</v-col>
@@ -30,10 +30,13 @@ import HelloWorld from '@/components/HelloWorld.vue';
 })
 
 export default class Home extends Vue {
-  buildings = this.$store.state.buildings
+  async mounted(): Promise<void> {
+    this.$store.dispatch('loadBuildings');
+    console.log(this.$store.state);
+  }
 
-  mounted(): void {
-    console.log(this.buildings);
+  get buildings(): any {
+    return this.$store.getters.getBuildings;
   }
 }
 </script>
