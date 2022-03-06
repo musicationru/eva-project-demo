@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
-import { BuildingState, RootState } from './types';
+import { RootState, BuildingState } from './types';
 
 Vue.use(Vuex);
 

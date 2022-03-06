@@ -1,27 +1,42 @@
 <template>
   <div class="home">
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-    <v-container>
-      <v-row v-if="buildings" class="mt-11">
-        <v-card v-for="building in buildings" :key="building.id" class="building-card">
-          <v-row>
-            <v-col>{{ building.floor }}</v-col>
-            <v-col>{{ building.rooms }}</v-col>
-            <v-col>-</v-col>
-            <v-col>{{ building.square }}</v-col>
+      <div class="main-wrapper mx-auto">
+        <div class="light-wrapper mx-auto">
+          <v-row v-if="buildings" class="mt-11">
+            <v-card v-for="building in buildings" :key="building.id" class="building ma-4 px-2">
+              <p class="text-12 d-flex justify-space-around align-center my-2">
+                  <span class="text-gray">{{ building.floor }} этаж</span>
+                  <span>{{ building.rooms }} комната</span>
+                  <span class="text-gray">-</span>
+                  <span>{{ building.square }}м<span class="text-index">2</span></span>
+              </p>
+              <div class="building-wrapper mx-auto">
+                <div class="building-number text-center d-flex justify-center align-center">
+                  <span>№{{ building.number }}</span>
+                </div>
+                <div class="building-image mx-2">
+                  <img src="@/assets/building.jpg">
+                </div>
+              </div>
+              <div class="building-bottom text-right">
+                <p class="text-20 mt-2 mb-0">{{ numberWithSpaces(building.price) }}р.</p>
+                  <span class="text-gray text-12">
+                    {{ pricePerMeter(building.price,
+                    building.square) }} р. за м<span class="text-index">2</span>
+                  </span>
+              </div>
+            </v-card>
           </v-row>
-          <div class="building-wrapper">
-            <div class="rectangle-6"></div>
-          </div>
-        </v-card>
-      </v-row>
-    </v-container>
+        </div>
+      </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue';
+import { BuildingState } from '@/store/types';
 
 @Component({
   components: {
@@ -32,40 +47,22 @@ import HelloWorld from '@/components/HelloWorld.vue';
 export default class Home extends Vue {
   async mounted(): Promise<void> {
     this.$store.dispatch('loadBuildings');
-    console.log(this.$store.state);
   }
 
-  get buildings(): any {
+  get buildings(): Array<BuildingState> {
     return this.$store.getters.getBuildings;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  pricePerMeter(price: number, square: number): string {
+    return this.numberWithSpaces(Math.ceil(price / square));
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  numberWithSpaces(x: number): string {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   }
 }
 </script>
 <style lang="scss" scoped>
-  .building-card {
-    /* Rectangle 4 */
-    width: 270px;
-    height: 365px;
-    background: #FFFFFF;
-    box-shadow: 0px 5px 20px rgba(86, 86, 86, 0.05);
-    border-radius: 10px;
-  }
-  .building-wrapper {
-    /* Rectangle 5 */
-    width: 250px;
-    height: 250px;
-    left: 10px;
-    top: 40px;
-    border: 1px solid #EBEBEB;
-    box-sizing: border-box;
-    border-radius: 5px;
-  }
-  .rectangle-6 {
-    /* Rectangle 6 */
-    width: 62px;
-    height: 30px;
-    float: right;
-    border: 1px solid #EBEBEB;
-    box-sizing: border-box;
-    border-radius: 0px 5px;
-  }
 </style>
