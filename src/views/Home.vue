@@ -1,33 +1,14 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-      <div class="main-wrapper mx-auto">
+    <div class="main-wrapper mx-auto">
         <div class="light-wrapper mx-auto">
-          <v-row v-if="buildings" class="mt-11">
-            <v-card v-for="building in buildings" :key="building.id" class="building ma-4 px-2">
-              <p class="text-12 d-flex justify-space-around align-center my-2">
-                  <span class="text-gray">{{ building.floor }} этаж</span>
-                  <span>{{ building.rooms }} комната</span>
-                  <span class="text-gray">-</span>
-                  <span>{{ building.square }}м<span class="text-index">2</span></span>
-              </p>
-              <div class="building-wrapper mx-auto">
-                <div class="building-number text-center d-flex justify-center align-center">
-                  <span>№{{ building.number }}</span>
-                </div>
-                <div class="building-image mx-2">
-                  <img src="@/assets/building.jpg">
-                </div>
-              </div>
-              <div class="building-bottom text-right">
-                <p class="text-20 mt-2 mb-0">{{ numberWithSpaces(building.price) }}р.</p>
-                  <span class="text-gray text-12">
-                    {{ pricePerMeter(building.price,
-                    building.square) }} р. за м<span class="text-index">2</span>
-                  </span>
-              </div>
-            </v-card>
-          </v-row>
+          <h1 class="text-center my-9"
+          style="line-height: 60px; font-weight: 500"
+          >
+          LOREM IPSUM DOLOR SIT
+          </h1>
+          <BuildingsFilter></BuildingsFilter>
+          <BuildingCards></BuildingCards>
         </div>
       </div>
   </div>
@@ -35,33 +16,16 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue';
-import { BuildingState } from '@/store/types';
+import BuildingCards from '../components/BuildingCards.vue';
+import BuildingsFilter from '../components/BuildingsFilter.vue';
 
 @Component({
   components: {
-    HelloWorld,
+    BuildingCards, BuildingsFilter,
   },
 })
 
 export default class Home extends Vue {
-  async mounted(): Promise<void> {
-    this.$store.dispatch('loadBuildings');
-  }
-
-  get buildings(): Array<BuildingState> {
-    return this.$store.getters.getBuildings;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  pricePerMeter(price: number, square: number): string {
-    return this.numberWithSpaces(Math.ceil(price / square));
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  numberWithSpaces(x: number): string {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-  }
 }
 </script>
 <style lang="scss" scoped>

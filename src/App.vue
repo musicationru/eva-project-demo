@@ -21,10 +21,19 @@ export default Vue.extend({
   $light-background: #F8F8F8;
   $dark-text: #2C323A;
   $accent: #70D24E;
+  $body-font-family: 'Gotham Pro';
+  $heading-font-family: 'Gotham Pro';
 
   %light-border {
     border: 1px solid #EBEBEB;
     box-sizing: border-box;
+  }
+
+  %gray-border {
+    background: #FFFFFF !important;
+    border: 1px solid #D8D8D8 !important;
+    box-sizing: border-box;
+    border-radius: 5px !important;
   }
 
   @font-face {
@@ -33,7 +42,7 @@ export default Vue.extend({
         url('assets/fonts/GothamPro-Medium.woff2') format('woff2'),
         url('assets/fonts/GothamPro-Medium.woff') format('woff'),
         url('assets/fonts/GothamPro-Medium.ttf') format('truetype');
-    font-weight: 500;
+    font-weight: 700;
     font-style: normal;
   }
   html {
@@ -43,7 +52,7 @@ export default Vue.extend({
     line-height: 28px;
   }
   #app {
-    font-family: 'Gotham Pro';
+    font-family: $body-font-family;
     height: 1772px;
     background: $dark-background !important;
   }
@@ -90,11 +99,8 @@ export default Vue.extend({
       }
   }
   .text {
-    position: absolute;
     width: 61px;
     height: 28px;
-    left: 120px;
-    top: 8px;
     /* identical to box height, or 233% */
     color: $dark-text;
     &-gray {
@@ -111,5 +117,15 @@ export default Vue.extend({
     &-20 {
       font-size: 1.429rem;
     }
+  }
+  .toggle-button {
+    width: 47px;
+    height: 40px;
+    @extend %gray-border;
+  }
+  .range-textarea {
+    width: 80px;
+    height: 40px;
+    @extend %gray-border;
   }
 </style>
