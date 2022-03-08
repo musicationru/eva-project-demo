@@ -33,7 +33,7 @@ import Vue from 'vue';
 
 export default Vue.extend({
   async mounted(): Promise<void> {
-    this.$store.dispatch('loadBuildings');
+    await this.$store.dispatch('loadBuildings');
   },
   methods: {
     pricePerMeter(price: number, square: number): string {
