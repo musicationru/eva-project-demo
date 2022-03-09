@@ -1,6 +1,6 @@
 <template>
   <v-row class="mt-11">
-    <v-card v-for="building in buildings" :key="building.id" class="building ma-4 px-2">
+    <v-card v-for="building in buildings" :key="building.id" class="building ma-4 px-2 pt-1">
       <p class="text-12 d-flex justify-space-around align-center my-2">
         <span class="text-gray">{{ building.floor }} этаж</span>
         <span>{{ building.rooms }} комната</span>
@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="building-bottom text-right">
-        <p class="text-20 mt-2 mb-0">{{ numberWithSpaces(building.price) }}р.</p>
+        <p class="text-20 mt-2 mb-n3">{{ numberWithSpaces(building.price) }}р.</p>
         <span class="text-gray text-12">
           {{ pricePerMeter(building.price, building.square) }} р. за м<span class="text-index"
             >2</span

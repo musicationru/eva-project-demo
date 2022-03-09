@@ -17,12 +17,11 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss">
+@import '~vuetify/src/components/VBtnToggle/_variables.scss';
   $dark-background: #2F2E2D;
   $light-background: #F8F8F8;
   $dark-text: #2C323A;
   $accent: #70D24E;
-  $body-font-family: 'Gotham Pro';
-  $heading-font-family: 'Gotham Pro';
 
   %light-border {
     border: 1px solid #EBEBEB;
@@ -41,8 +40,18 @@ export default Vue.extend({
     src: local('Gotham Pro Medium'), local('Gotham-Pro-Medium'),
         url('assets/fonts/GothamPro-Medium.woff2') format('woff2'),
         url('assets/fonts/GothamPro-Medium.woff') format('woff'),
-        url('assets/fonts/GothamPro-Medium.ttf') format('truetype');
+        url('assets/fonts/GothamPro-Medium.ttf') format('truetype'),
+        url('assets/fonts/GothamPro-Light.woff') format('woff'),
+        url('assets/fonts/GothamPro-Light.ttf') format('truetype');
     font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Gotham Pro Light';
+    src: local('Gotham Pro Light'), local('Gotham-Pro-Light'),
+        url('assets/fonts/GothamPro-Light.woff') format('woff'),
+        url('assets/fonts/GothamPro-Light.ttf') format('truetype');
+    font-weight: 400;
     font-style: normal;
   }
   html {
@@ -51,10 +60,29 @@ export default Vue.extend({
     font-size: 14px !important;
     line-height: 28px;
   }
+  a {
+    text-decoration: underline $accent 2px;
+    color: $dark-text !important;
+  }
   #app {
     font-family: $body-font-family;
     height: 1772px;
     background: $dark-background !important;
+  }
+  .v-input > * {
+    font-family: 'Gotham Pro Light';
+    text-align: center !important;
+  }
+  .v-application {
+    font-family: $body-font-family !important;
+  }
+  .v-btn {
+    letter-spacing: 0 !important;
+    box-shadow: none !important;
+  }
+  .v-text-field {
+    width: 80px !important;
+    height: 40px !important;
   }
   .main-wrapper {
     /* Rectangle */
@@ -72,18 +100,18 @@ export default Vue.extend({
     padding: 0 5vw 0 5vw;
     height: 1552px;
     background: #F8F8F8;
-    border-radius: 10px;
+    border-radius: 10px !important;
   }
   .building {
       width: 270px;
       height: 365px;
       background: #FFFFFF;
-      box-shadow: 0px 5px 20px rgba(86, 86, 86, 0.05);
-      border-radius: 10px;
+      box-shadow: 0px 5px 20px rgba(86, 86, 86, 0.05) !important;
+      border-radius: 10px !important;
       &-wrapper {
         width: 250px;
         height: 250px;
-        border-radius: 5px;
+        border-radius: 5px !important;
         @extend %light-border;
       }
       &-image {
@@ -94,7 +122,7 @@ export default Vue.extend({
         width: 62px;
         height: 30px;
         float: right;
-        border-radius: 0px 5px;
+        border-radius: 0px 5px !important;
         @extend %light-border;
       }
   }
@@ -111,6 +139,9 @@ export default Vue.extend({
       font-size: 0.571rem;
       bottom: 4px;
     }
+    &-10 {
+      font-size: 0.714rem;
+    }
     &-12 {
       font-size: 0.857rem;
     }
@@ -118,10 +149,17 @@ export default Vue.extend({
       font-size: 1.429rem;
     }
   }
+  .bg-accent {
+    background-color: $accent !important;
+    color: white !important;
+  }
   .toggle-button {
     width: 47px;
     height: 40px;
     @extend %gray-border;
+    &-text:active {
+        color:white !important;
+    }
   }
   .range-textarea {
     width: 80px;
